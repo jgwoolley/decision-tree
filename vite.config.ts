@@ -5,6 +5,10 @@ import { VitePWA } from 'vite-plugin-pwa'
 
 // https://vite.dev/config/
 export default defineConfig({
+  // Relative base so the build works unmodified whether it's served from a domain
+  // root (python -m http.server, a custom domain) or a subpath (GitHub Pages /
+  // GitLab Pages project sites are served from https://host/<repo-name>/).
+  base: './',
   plugins: [
     react(),
     tailwindcss(),
@@ -17,8 +21,8 @@ export default defineConfig({
         short_name: 'Decision Trees',
         description:
           'Build sequential or weighted decision trees for technical choices, like picking between a Jupyter notebook, a Spark job, or a NiFi dataflow.',
-        start_url: '/',
-        scope: '/',
+        start_url: '.',
+        scope: './',
         display: 'standalone',
         background_color: '#f8fafc',
         theme_color: '#4f46e5',

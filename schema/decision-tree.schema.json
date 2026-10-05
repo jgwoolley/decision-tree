@@ -1,5 +1,5 @@
 {
-  "$id": "https://decision-tree.local/schema/decision-tree.schema.json",
+  "$id": "https://github.com/jgwoolley/decision-tree/schema/decision-tree.schema.json",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$ref": "#/definitions/DecisionTree",
   "definitions": {
