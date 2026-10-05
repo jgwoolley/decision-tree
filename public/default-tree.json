@@ -1,0 +1,66 @@
+{
+  "$schema": "../schema/decision-tree.schema.json",
+  "id": "default-notebook-spark-nifi",
+  "name": "Jupyter Notebook vs. Spark Job vs. NiFi Dataflow",
+  "description": "A starter example: walk through a few questions to land on the right tool for a data task.",
+  "mode": "sequential",
+  "schemaVersion": 1,
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "updatedAt": "2026-01-01T00:00:00.000Z",
+  "options": [
+    { "id": "opt-notebook", "name": "Jupyter Notebook" },
+    { "id": "opt-spark", "name": "Apache Spark Job" },
+    { "id": "opt-nifi", "name": "Apache NiFi Dataflow" }
+  ],
+  "rootQuestionId": "q-root",
+  "questions": {
+    "q-root": {
+      "id": "q-root",
+      "text": "How large is the dataset you need to process?",
+      "choices": [
+        {
+          "id": "c-root-small",
+          "text": "Small enough to fit in memory on one machine",
+          "nextQuestionId": "q-scope"
+        },
+        {
+          "id": "c-root-large",
+          "text": "Too large for a single machine — needs distributed compute",
+          "leafOptionId": "opt-spark"
+        }
+      ]
+    },
+    "q-scope": {
+      "id": "q-scope",
+      "text": "Is this a one-off exploratory analysis or a repeatable production pipeline?",
+      "choices": [
+        {
+          "id": "c-scope-explore",
+          "text": "One-off exploration / prototyping",
+          "leafOptionId": "opt-notebook"
+        },
+        {
+          "id": "c-scope-pipeline",
+          "text": "Repeatable pipeline that needs to run on a schedule",
+          "nextQuestionId": "q-nature"
+        }
+      ]
+    },
+    "q-nature": {
+      "id": "q-nature",
+      "text": "Is the work mostly about moving/transforming data between systems, rather than heavy custom computation?",
+      "choices": [
+        {
+          "id": "c-nature-movement",
+          "text": "Yes — mostly data movement, routing, or format conversion",
+          "leafOptionId": "opt-nifi"
+        },
+        {
+          "id": "c-nature-compute",
+          "text": "No — it involves custom or heavy data transformation logic",
+          "leafOptionId": "opt-spark"
+        }
+      ]
+    }
+  }
+}
